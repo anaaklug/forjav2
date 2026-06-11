@@ -1,0 +1,210 @@
+/* ============================================================
+   FORJA — Animations & Feedback Visual
+   ============================================================ */
+
+/* --- Entrada de página --- */
+.page-enter {
+  animation: page-fade-in 0.4s ease both;
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Partículas de XP ao completar tarefa --- */
+.xp-burst {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  color: #9b59b6;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(155,89,182,0.6);
+  animation: float-up 1.2s ease forwards;
+}
+
+.gold-burst {
+  color: #f1c40f;
+  text-shadow: 0 0 10px rgba(241,196,15,0.6);
+}
+
+@keyframes float-up {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  60%  { opacity: 1; transform: translateY(-50px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+}
+
+/* --- Shake ao tomar dano --- */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
+}
+
+.shake { animation: shake 0.4s ease; }
+
+/* --- Glow ao subir de nível --- */
+@keyframes level-up-glow {
+  0%   { box-shadow: 0 0 0 rgba(212,168,67,0); }
+  50%  { box-shadow: 0 0 40px rgba(212,168,67,0.6); }
+  100% { box-shadow: 0 0 0 rgba(212,168,67,0); }
+}
+
+.level-up-effect { animation: level-up-glow 1.5s ease; }
+
+/* --- Check ao completar --- */
+.task-complete-flash {
+  animation: complete-flash 0.4s ease;
+}
+
+@keyframes complete-flash {
+  0%   { background: transparent; }
+  50%  { background: rgba(39,174,96,0.2); }
+  100% { background: transparent; }
+}
+
+/* --- Bounce do item na loja --- */
+.bounce {
+  animation: bounce 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  30%       { transform: scale(0.9); }
+  60%       { transform: scale(1.1); }
+}
+
+/* --- Badge unlock --- */
+.badge-unlock-anim {
+  animation: badge-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes badge-pop {
+  from { transform: scale(0) rotate(-10deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg);  opacity: 1; }
+}
+
+/* --- Spinner de carregamento --- */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Onboarding --- */
+.onboarding-appear {
+  animation: onboard-in 0.8s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+}
+
+@keyframes onboard-in {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.onboarding-text-reveal {
+  animation: text-reveal 0.6s ease both;
+}
+
+@keyframes text-reveal {
+  from { opacity: 0; letter-spacing: 0.3em; }
+  to   { opacity: 1; letter-spacing: inherit; }
+}
+
+/* --- Flicker do título (efeito chama) --- */
+@keyframes flicker {
+  0%, 100% { text-shadow: 0 0 10px rgba(212,168,67,0.8), 0 0 30px rgba(212,168,67,0.4); }
+  25%       { text-shadow: 0 0 8px rgba(212,168,67,0.6), 0 0 20px rgba(212,168,67,0.2); }
+  75%       { text-shadow: 0 0 15px rgba(212,168,67,1),  0 0 40px rgba(212,168,67,0.5); }
+}
+
+.flicker { animation: flicker 3s ease-in-out infinite; }
+
+/* --- Splash screen --- */
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--bg-deep);
+  transition: opacity 0.5s ease;
+}
+
+#splash-screen.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#splash-logo {
+  width: clamp(160px, 40vw, 280px);
+  image-rendering: pixelated;
+  animation: splash-logo-in 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+}
+
+@keyframes splash-logo-in {
+  from { opacity: 0; transform: scale(0.8) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.splash-bar-track {
+  width: clamp(120px, 30vw, 200px);
+  height: 3px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.splash-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-amber));
+  border-radius: 999px;
+  animation: splash-load 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes splash-load {
+  0%   { width: 0%; }
+  60%  { width: 80%; }
+  100% { width: 100%; }
+}
+
+/* --- Botão de tema --- */
+#theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-glow);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+}
+
+#theme-toggle:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  transform: scale(1.1);
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Forja — Conquistas</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <meta name="theme-color" content="#0d0b14" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- SPLASH SCREEN -->
+  <div id="splash-screen">
+    <img id="splash-logo" src="" alt="Forja" />
+    <div class="splash-bar-track">
+      <div class="splash-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- BOTÃO DE TEMA -->
+  <button id="theme-toggle" title="Alternar tema">🌙</button>
+
+
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <span class="nav-logo forja-title">⚒ FORJA</span>
+        <ul class="nav-links">
+          <li><a href="index.html">🏠 <span>Início</span></a></li>
+          <li><a href="loja.html">🛒 <span>Loja</span></a></li>
+          <li><a href="conquistas.html" class="active">🏆 <span>Conquistas</span></a></li>
+          <li><a href="personagem.html">⚔️ <span>Herói</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container page-enter" style="padding-top:28px;padding-bottom:60px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px;">
+      <h2>🏆 Conquistas</h2>
+      <span id="badges-count" style="
+        font-family:var(--font-display);font-size:0.75rem;
+        background:var(--bg-elevated);border:1px solid var(--border);
+        border-radius:999px;padding:4px 14px;color:var(--text-secondary);
+      ">0 / 0 desbloqueadas</span>
+    </div>
+
+    <div id="badges-grid" style="
+      display:grid;
+      grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+      gap:14px;
+    ">
+      <!-- Renderizado por BadgesUI -->
+    </div>
+  </main>
+
+  <div id="toast-container"></div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/badges.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/habits.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/badges-ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

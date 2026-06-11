@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Forja — Forje seus Hábitos</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <meta name="theme-color" content="#0d0b14" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- SPLASH SCREEN -->
+  <div id="splash-screen">
+    <img id="splash-logo" src="" alt="Forja" />
+    <div class="splash-bar-track">
+      <div class="splash-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- BOTÃO DE TEMA -->
+  <button id="theme-toggle" title="Alternar tema">🌙</button>
+
+
+  <!-- ================================================
+       ONBOARDING OVERLAY
+  ================================================= -->
+  <div id="onboarding-overlay" style="
+    display: none;
+    position: fixed; inset: 0; z-index: 10000;
+    background: radial-gradient(ellipse at center, #1a0f2e 0%, #0d0b14 100%);
+    align-items: center; justify-content: center;
+    flex-direction: column; gap: 28px; padding: 24px;
+    overflow-y: auto;
+  ">
+    <!-- Partículas decorativas -->
+    <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;">
+      <div style="position:absolute;top:15%;left:8%;font-size:2rem;opacity:0.07;animation:float-up 6s ease-in-out infinite alternate;">⚔️</div>
+      <div style="position:absolute;top:70%;left:80%;font-size:1.5rem;opacity:0.05;animation:float-up 8s ease-in-out infinite alternate-reverse;">🛡️</div>
+      <div style="position:absolute;top:35%;left:88%;font-size:1.8rem;opacity:0.06;animation:float-up 7s ease-in-out infinite alternate;">🔥</div>
+      <div style="position:absolute;top:82%;left:12%;font-size:1.2rem;opacity:0.05;animation:float-up 9s ease-in-out infinite alternate-reverse;">⚗️</div>
+      <div style="position:absolute;top:50%;left:3%;font-size:1rem;opacity:0.04;animation:float-up 10s ease-in-out infinite alternate;">🏆</div>
+    </div>
+
+    <!-- Logo -->
+    <div style="text-align:center;position:relative;z-index:1;">
+      <h1 class="flicker forja-title" style="font-size:clamp(2.8rem,9vw,5rem);margin-bottom:6px;letter-spacing:0.15em;">FORJA</h1>
+      <p style="font-family:var(--font-display);font-size:0.72rem;letter-spacing:0.4em;color:var(--text-muted);text-transform:uppercase;">
+        Forje seus Hábitos
+      </p>
+    </div>
+
+    <!-- Seleção de classe + sprite -->
+    <div style="position:relative;z-index:1;width:100%;max-width:380px;">
+
+      <!-- Cards de classe -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">
+
+        <!-- Guerreiro -->
+        <div id="class-warrior" onclick="UI.selectClass('warrior')" style="
+          background:var(--bg-elevated);border:2px solid var(--accent-gold);
+          border-radius:var(--radius-lg);padding:14px 10px;text-align:center;
+          cursor:pointer;transition:all 0.2s;
+        ">
+          <div style="
+            width:80px;height:80px;margin:0 auto 10px;
+            background:var(--bg-card);border-radius:10px;
+            display:flex;align-items:center;justify-content:center;
+            overflow:hidden;image-rendering:pixelated;
+            box-shadow:0 0 16px rgba(124,58,237,0.2);
+          ">
+            <img id="warrior-preview-img" src="assets/sprites/escudeiro_1.png" alt="Escudeiro"
+              style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"
+              onerror="this.onerror=null;this.style.display='none';this.parentElement.innerHTML+='<span style='font-size:2.5rem'>⚔️</span>'"
+            />
+          </div>
+          <div style="font-family:var(--font-display);font-size:0.78rem;color:var(--accent-gold);font-weight:600;margin-bottom:2px;">Guerreiro</div>
+          <div style="font-size:0.68rem;color:var(--text-muted);">Força e disciplina</div>
+        </div>
+
+        <!-- Mago -->
+        <div id="class-mage" onclick="UI.selectClass('mage')" style="
+          background:var(--bg-elevated);border:2px solid var(--border);
+          border-radius:var(--radius-lg);padding:14px 10px;text-align:center;
+          cursor:pointer;transition:all 0.2s;opacity:0.65;
+        ">
+          <div style="
+            width:80px;height:80px;margin:0 auto 10px;
+            background:var(--bg-card);border-radius:10px;
+            display:flex;align-items:center;justify-content:center;
+            overflow:hidden;image-rendering:pixelated;
+            box-shadow:0 0 16px rgba(124,58,237,0.2);
+          ">
+            <img id="mage-preview-img" src="assets/sprites/mago_1.png" alt="Mago"
+              style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"
+              onerror="this.onerror=null;this.style.display='none';this.parentElement.innerHTML+='<span style='font-size:2.5rem'>🧙</span>'"
+            />
+          </div>
+          <div style="font-family:var(--font-display);font-size:0.78rem;color:var(--text-secondary);font-weight:600;margin-bottom:2px;">Mago</div>
+          <div style="font-size:0.68rem;color:var(--text-muted);">Sabedoria arcana</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Texto narrativo -->
+    <div style="text-align:center;max-width:400px;position:relative;z-index:1;">
+      <p style="font-size:1rem;color:var(--text-secondary);line-height:1.9;">
+        Todo grande herói começa com um único passo.<br>
+        Construa seus hábitos. Ganhe poder.<br>
+        <em style="color:var(--accent-gold);">Torne-se lendário.</em>
+      </p>
+    </div>
+
+    <!-- Formulário de nome -->
+    <form id="onboarding-form" style="width:100%;max-width:340px;display:flex;flex-direction:column;gap:14px;position:relative;z-index:1;">
+      <input type="hidden" id="onboarding-class" value="warrior" />
+      <div>
+        <label for="onboarding-name" style="
+          display:block;font-family:var(--font-display);font-size:0.68rem;
+          letter-spacing:0.12em;text-transform:uppercase;
+          color:var(--text-muted);margin-bottom:8px;
+        ">Como você quer ser chamado?</label>
+        <input
+          type="text"
+          id="onboarding-name"
+          placeholder="Seu nome ou apelido..."
+          maxlength="30"
+          autocomplete="off"
+          style="text-align:center;font-size:1.1rem;letter-spacing:0.04em;"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary" style="justify-content:center;padding:15px;font-size:0.85rem;">
+        ⚔️ &nbsp; Começar minha jornada
+      </button>
+    </form>
+
+    <p style="font-size:0.72rem;color:var(--text-muted);position:relative;z-index:1;">
+      Seus dados ficam salvos localmente no seu navegador.
+    </p>
+  </div>
+
+  <!-- ================================================
+       MODAL DE LEVEL UP
+  ================================================= -->
+  <div id="levelup-modal" style="
+    display:none;position:fixed;inset:0;z-index:9000;
+    background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);
+    align-items:center;justify-content:center;
+  ">
+    <div style="
+      background:var(--bg-card);border:2px solid var(--accent-gold);
+      border-radius:var(--radius-lg);padding:40px 48px;text-align:center;
+      box-shadow:0 0 60px rgba(212,168,67,0.3);
+      animation:onboard-in 0.5s cubic-bezier(0.34,1.2,0.64,1);
+      max-width:360px;width:90%;
+    ">
+      <div style="font-size:3rem;margin-bottom:12px;">🎉</div>
+      <h2 class="flicker forja-title" style="font-size:1.8rem;margin-bottom:6px;">LEVEL UP!</h2>
+      <p id="levelup-title" style="font-family:var(--font-display);font-size:0.8rem;letter-spacing:0.15em;color:var(--accent-amber);text-transform:uppercase;margin-bottom:20px;">—</p>
+      <div id="levelup-sprite" style="
+        width:120px;height:120px;margin:0 auto 20px;
+        background:var(--bg-elevated);border:2px solid var(--border-glow);
+        border-radius:12px;display:flex;align-items:center;justify-content:center;
+        overflow:hidden;image-rendering:pixelated;
+        box-shadow:0 0 30px rgba(124,58,237,0.3);
+      "></div>
+      <p id="levelup-desc" style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:24px;">—</p>
+      <button class="btn btn-primary" onclick="UI.closeLevelUp()" style="justify-content:center;width:100%;">
+        Continuar forjando ⚒
+      </button>
+    </div>
+  </div>
+
+  <!-- ================================================
+       NAVEGAÇÃO
+  ================================================= -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <span class="nav-logo forja-title">⚒ FORJA</span>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">🏠 <span>Início</span></a></li>
+          <li><a href="loja.html">🛒 <span>Loja</span></a></li>
+          <li><a href="conquistas.html">🏆 <span>Conquistas</span></a></li>
+          <li><a href="personagem.html">⚔️ <span>Herói</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================================================
+       CONTEÚDO PRINCIPAL
+  ================================================= -->
+  <main class="container page-enter" style="padding-top:28px;padding-bottom:72px;">
+
+    <!-- ── PAINEL DO JOGADOR ── -->
+    <section id="player-panel" style="margin-bottom:28px;">
+      <div style="display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;" class="card" id="player-grid">
+
+        <!-- Sprite do personagem -->
+        <div style="position:relative;">
+          <div id="player-sprite-container" style="
+            width:88px;height:88px;
+            background:var(--bg-elevated);
+            border:2px solid var(--border-glow);
+            border-radius:12px;overflow:hidden;
+            display:flex;align-items:center;justify-content:center;
+            image-rendering:pixelated;
+            box-shadow:0 0 20px rgba(124,58,237,0.2);
+            flex-shrink:0;
+          ">
+            <img id="player-sprite-img" src="" alt="Personagem"
+              style="width:100%;height:100%;object-fit:contain;image-rendering:pixelated;"
+              onerror="this.style.display='none';document.getElementById('player-sprite-fallback').style.display='flex';"
+            />
+            <div id="player-sprite-fallback" style="display:none;font-size:2.8rem;">⚔️</div>
+          </div>
+          <!-- Badge de nível sobre o sprite -->
+          <div id="player-level-badge" style="
+            position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);
+            background:linear-gradient(135deg,var(--accent-gold),var(--accent-amber));
+            color:#1a0f00;font-family:var(--font-display);font-size:0.58rem;
+            font-weight:700;letter-spacing:0.06em;
+            padding:2px 10px;border-radius:999px;white-space:nowrap;
+            box-shadow:0 2px 8px rgba(212,168,67,0.4);
+          ">Nível 1</div>
+        </div>
+
+        <!-- Nome, título e barras -->
+        <div style="min-width:0;">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px;">
+            <h2 id="player-name" style="color:var(--accent-gold);font-size:1.3rem;">—</h2>
+            <span id="player-class-title" style="
+              font-family:var(--font-display);font-size:0.65rem;letter-spacing:0.1em;
+              color:var(--text-muted);text-transform:uppercase;
+            ">Escudeiro</span>
+          </div>
+          <div style="display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap;">
+            <span id="player-streak" style="font-size:0.82rem;color:var(--accent-amber);">🔥 0 dias</span>
+            <span id="player-total" style="font-size:0.82rem;color:var(--text-muted);">✅ 0 tarefas</span>
+          </div>
+
+          <!-- Barras HP e XP -->
+          <div style="display:flex;flex-direction:column;gap:7px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-family:var(--font-display);font-size:0.6rem;color:var(--hp-color);letter-spacing:0.08em;width:20px;">HP</span>
+              <div class="progress-bar progress-hp" style="flex:1;">
+                <div class="progress-fill" id="hp-bar" style="width:100%;"></div>
+              </div>
+              <span id="hp-text" style="font-size:0.75rem;color:var(--text-secondary);min-width:52px;text-align:right;">50/50</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-family:var(--font-display);font-size:0.6rem;color:var(--xp-color);letter-spacing:0.08em;width:20px;">XP</span>
+              <div class="progress-bar progress-xp" style="flex:1;">
+                <div class="progress-fill" id="xp-bar" style="width:0%;"></div>
+              </div>
+              <span id="xp-text" style="font-size:0.75rem;color:var(--text-secondary);min-width:52px;text-align:right;">0/100</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gold -->
+        <div style="
+          text-align:center;padding:14px 18px;
+          background:var(--bg-elevated);border-radius:var(--radius-md);
+          border:1px solid rgba(212,168,67,0.2);flex-shrink:0;
+        ">
+          <div style="font-size:1.6rem;margin-bottom:2px;">💰</div>
+          <div id="player-gold" style="font-family:var(--font-display);font-size:1.2rem;color:var(--gold-color);font-weight:700;line-height:1;">0</div>
+          <div style="font-family:var(--font-display);font-size:0.55rem;color:var(--text-muted);letter-spacing:0.12em;margin-top:4px;">GOLD</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── HÁBITOS DIÁRIOS ── -->
+    <section style="margin-bottom:28px;">
+      <div class="divider">📅 Hábitos Diários</div>
+
+      <div id="habits-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"></div>
+
+      <!-- Formulário novo hábito -->
+      <details class="card" style="background:var(--bg-elevated);cursor:pointer;">
+        <summary style="
+          font-family:var(--font-display);font-size:0.78rem;letter-spacing:0.06em;
+          color:var(--text-secondary);list-style:none;display:flex;align-items:center;gap:8px;
+          user-select:none;
+        ">
+          <span style="font-size:1rem;color:var(--accent-gold);">＋</span> Novo Hábito Diário
+        </summary>
+        <div style="margin-top:14px;">
+          <form id="habit-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input type="text" id="habit-name" placeholder="Nome do hábito..." style="flex:1;min-width:140px;" required />
+            <select id="habit-difficulty" style="width:110px;">
+              <option value="easy">Fácil</option>
+              <option value="medium" selected>Médio</option>
+              <option value="hard">Difícil</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
+          </form>
+        </div>
+      </details>
+    </section>
+
+    <!-- ── TO-DOS ── -->
+    <section>
+      <div class="divider">✅ Tarefas Únicas</div>
+
+      <div id="todos-list" style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"></div>
+
+      <!-- Formulário nova tarefa -->
+      <details class="card" style="background:var(--bg-elevated);cursor:pointer;">
+        <summary style="
+          font-family:var(--font-display);font-size:0.78rem;letter-spacing:0.06em;
+          color:var(--text-secondary);list-style:none;display:flex;align-items:center;gap:8px;
+          user-select:none;
+        ">
+          <span style="font-size:1rem;color:var(--accent-gold);">＋</span> Nova Tarefa
+        </summary>
+        <div style="margin-top:14px;">
+          <form id="todo-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input type="text" id="todo-name" placeholder="Nome da tarefa..." style="flex:1;min-width:140px;" required />
+            <select id="todo-difficulty" style="width:110px;">
+              <option value="easy">Fácil</option>
+              <option value="medium" selected>Médio</option>
+              <option value="hard">Difícil</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-sm">Adicionar</button>
+          </form>
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <div id="toast-container"></div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/badges.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/habits.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
