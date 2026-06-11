@@ -32,8 +32,8 @@
   --border-glow:  #5a3e8a;
 
   --text-primary:   #e8dfc8;
-  --text-secondary: #9d93b8;
-  --text-muted:     #5a5375;
+  --text-secondary: #bfb6d8;
+  --text-muted:     #bdb3d6;
 
   --accent-gold:  #d4a843;
   --accent-amber: #e8781a;
@@ -70,8 +70,8 @@
   --border-glow:  #a07840;
 
   --text-primary:   #2a1f0e;
-  --text-secondary: #5a4030;
-  --text-muted:     #9a8060;
+  --text-secondary: #493529;
+  --text-muted:     #574631;
 
   --accent-gold:  #b07010;
   --accent-amber: #c05010;
@@ -113,7 +113,7 @@ body {
   background: var(--bg-deep);
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 1.15rem;
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
